@@ -19,6 +19,7 @@ node {
 	   //Get Maven Home Path
 	  
 	   sh "${mvnHome}/bin/mvn package"
+	   sh "${mvnHome}/bin/mvn jacoco:report"
    }
    
    /*stage('Sonarqube') {
