@@ -9,7 +9,7 @@ node {
     // Clone repo
 	//git branch: 'master', 
 	//credentialsId: 'github', 
-	sh 'git clone https://github.com/fmfjunior/com.sonar.maven'
+	sh 'git clone https://github.com/fmfjunior/ExampleJavaProject'
 	//url: 'https://github.com/fmfjunior/com.sonar.maven'
    
    }
