@@ -19,7 +19,7 @@ node {
 	   //Get Maven Home Path
 	  
 	   sh "${mvnHome}/bin/mvn package"
-	   sh "${mvnHome}/bin/mvn prepare-agent"
+	   sh "${mvnHome}/bin/mvn jacoco:prepare-agent"
 	   sh "${mvnHome}/bin/mvn jacoco:report"
    }
    
