@@ -6,11 +6,11 @@
   
   
 
-  <!--<groupId>SonarCoverageTest</groupId>
+  <groupId>SonarCoverageTest</groupId>
   <artifactId>SonarCoverageTest</artifactId>
   <version>0.0.1-SNAPSHOT</version>
 
-  <name>SonarCoverageTest</name>-->
+  <name>SonarCoverageTest</name>
   <!-- FIXME change it to the project's website -->
    <!--<url>http://www.example.com</url> -->
 
