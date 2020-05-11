@@ -1,4 +1,17 @@
 pipeline {
+   // This is to demo github action	
+   def sonarUrl = 'sonar.host.url=http://172.17.0.2:9000'
+   def mvnHome = tool name: 'Maven', type: 'maven'
+   stage('GitClone'){
+	deleteDir()
+  	checkout scm
+    // Clone repo
+	//git branch: 'master', 
+	//credentialsId: 'github', 
+	sh 'git clone https://github.com/fmfjunior/ExampleJavaProject'
+	//url: 'https://github.com/fmfjunior/com.sonar.maven'
+   
+   }
     agent any 
     tools {
         jdk 'jdk11'
