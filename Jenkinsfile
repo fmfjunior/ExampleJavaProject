@@ -32,6 +32,7 @@ pipeline {
 	 steps { 
 	   //junit 'reports/**/*.xml'
 	   sh 'mvn jacoco:prepare-agent'
+           sh 'mvn jacoco:report'
            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
 	 }
     } 
