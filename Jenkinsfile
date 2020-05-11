@@ -48,7 +48,7 @@ pipeline {
         }
     }
   }
-}  
+  
   /*stage('Code QA') {
 	    withCredentials([string(credentialsId: 'SonarToken', variable: 'sonarToken')]) {
        	    def sonarToken = "sonar.login=${sonarToken}"
