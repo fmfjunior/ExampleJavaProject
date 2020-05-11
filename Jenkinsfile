@@ -46,13 +46,14 @@ pipeline {
                 }
           }
       }
-	     post {
+ }
+    post {
         always {
             junit 'build/reports/**/*.xml'
-        }
+            }
     }
-    }
-  }
+}
+  
   
   /*stage('Code QA') {
 	    withCredentials([string(credentialsId: 'SonarToken', variable: 'sonarToken')]) {
