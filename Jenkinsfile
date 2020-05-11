@@ -39,11 +39,11 @@ pipeline {
 	    steps { 
               withSonarQubeEnv('sonar_server'){
               sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=devops -Dsonar.host.url=http://172.17.0.3:9000 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/mvm**,**/src/test/**,**/model/**" 
-            }
-     }      
-   }
- }
-   
+              }
+            }          
+     }
+  }
+}  
   /*stage('Code QA') {
 	    withCredentials([string(credentialsId: 'SonarToken', variable: 'sonarToken')]) {
        	    def sonarToken = "sonar.login=${sonarToken}"
