@@ -2,7 +2,9 @@ node {
    // This is to demo github action	
    def sonarUrl = 'sonar.host.url=http://172.17.0.2:9000'
   // def mvnHome = tool name: 'maven', type: 'maven'
-   stage('GitClone'){
+  
+    stages {
+       stage('GitClone'){
 	deleteDir()
   	checkout scm
     // Clone repo
@@ -10,15 +12,7 @@ node {
 	//credentialsId: 'github', 
 	sh 'git clone https://github.com/fmfjunior/ExampleJavaProject'
 	//url: 'https://github.com/fmfjunior/com.sonar.maven'
-   
-   }
-    agent any 
-    tools {
-        jdk 'jdk11'
-        maven 'maven3'
-                
     }
-    stages {
       stage ( 'construindo' ) {
           steps {
               sh 'mvn clean package -DskipTest=true'
