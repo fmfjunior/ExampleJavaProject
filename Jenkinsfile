@@ -28,12 +28,12 @@ pipeline {
     }
 	 
 	 
-    stage( 'Teste Unitario') {
-	 steps { 
+    // stage( 'Teste Unitario') {
+	// steps { 
 	   //junit 'reports/**/*.xml'
-           junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
-	  }
-    } 
+          // junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
+	 // }
+//    } 
 	 
    
      stage( 'Scanner sonar') {
@@ -46,6 +46,11 @@ pipeline {
                 }
           }
       }
+	     post {
+        always {
+            junit 'build/reports/**/*.xml'
+        }
+    }
     }
   }
   
