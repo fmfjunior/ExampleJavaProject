@@ -1,7 +1,7 @@
 pipeline {
   agent any 
   tools {
-        jdk 'jdk11'
+        //jdk 'jdk11'
         maven 'maven3'
                 
     }
@@ -49,7 +49,7 @@ pipeline {
  }
     post {
         always {
-            junit '/reports/**/*.xml'
+            junit 'reports/**/*.xml'
             }
     }
 }
