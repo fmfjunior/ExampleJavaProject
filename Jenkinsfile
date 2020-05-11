@@ -2,7 +2,7 @@ node {
 
    // This is to demo github action	
    def sonarUrl = 'sonar.host.url=http://172.17.0.2:9000'
-   def mvnHome = tool name: 'Maven', type: 'maven'
+   def mvnHome = tool name: 'maven3', type: 'maven'
    stage('GitClone'){
 	deleteDir()
   	checkout scm
