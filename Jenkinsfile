@@ -2,8 +2,7 @@ node {
    // This is to demo github action	
    def sonarUrl = 'sonar.host.url=http://172.17.0.2:9000'
   // def mvnHome = tool name: 'maven', type: 'maven'
-  
-    stages {
+
        stage('GitClone'){
 	deleteDir()
   	checkout scm
@@ -40,6 +39,7 @@ node {
             archiveArtifacts artifacts: 'target/tasks-backend.war, frontend/target/tasks.war', onlyIfSuccessful: true
         }
     }
+}
 }
 
 /*node {
@@ -115,4 +115,4 @@ node {
 // Thanks,
 // DevOps Team""", cc: '', from: '', replyTo: '', subject: "${env.JOB_NAME} Success", to: 'hari.kammana@gmail.com'
    
-   //}
+
