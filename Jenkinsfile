@@ -31,7 +31,7 @@ pipeline {
     stage( 'Teste Unitario') {
 	 steps { 
 	   //junit 'reports/**/*.xml'
-           junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml
+           junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
 	  }
     } 
 	 
