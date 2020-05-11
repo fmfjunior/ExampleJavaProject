@@ -31,9 +31,9 @@ pipeline {
      stage( 'Teste Unitario') {
 	 steps { 
 	   //junit 'reports/**/*.xml'
+	   junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
 	   sh 'mvn jacoco:prepare-agent'
            sh 'mvn jacoco:report'
-           junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
 	 }
     } 
 	 
