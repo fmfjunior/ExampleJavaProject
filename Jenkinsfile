@@ -24,21 +24,19 @@ node {
 	   sh "${mvnHome}/bin/mvn jacoco:prepare-agent"
 	   sh "${mvnHome}/bin/mvn jacoco:report"
    }
-   
-	   stage( 'teste estatico scanner sonar') {
-               
+     
+     stage( 'Teste Unitario') {
+	   junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml'
+            archiveArtifacts artifacts: 'target/tasks-backend.war, frontend/target/tasks.war', onlyIfSuccessful: true  
+	    }
+ 
+     stage( 'Teste Estatico') {
                     withSonarQubeEnv('sonar_server'){
                     sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=devops -Dsonar.host.url=http://172.17.0.3:9000 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/mvm**,**/src/test/**,**/model/**" 
                 }
         }
     }
-    post {
-        always {
-            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml'
-            archiveArtifacts artifacts: 'target/tasks-backend.war, frontend/target/tasks.war', onlyIfSuccessful: true
-        }
-    }
-
+   
   /*stage('Code QA') {
 	    withCredentials([string(credentialsId: 'SonarToken', variable: 'sonarToken')]) {
        	    def sonarToken = "sonar.login=${sonarToken}"
