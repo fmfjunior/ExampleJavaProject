@@ -16,19 +16,18 @@ node {
    
    }
    
-   stage('MvnPackage'){
+     stage( 'Teste Unitario') {
+	   junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml'
+	   sh "${mvnHome}/bin/mvn test"
+	    }
+ 
+    stage('MvnPackage'){
 	 // Build using maven
 	   //Get Maven Home Path
 	  
 	   sh "${mvnHome}/bin/mvn package"
-	   sh "${mvnHome}/bin/mvn jacoco:prepare-agent"
-	   sh "${mvnHome}/bin/mvn jacoco:report"
    }
      
-     stage( 'Teste Unitario') {
-	   junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml'
-            archiveArtifacts artifacts: 'target/tasks-backend.war, frontend/target/tasks.war', onlyIfSuccessful: true  
-	    }
  
      stage( 'Teste Estatico') {
                     withSonarQubeEnv('sonar_server'){
