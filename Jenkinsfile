@@ -3,6 +3,8 @@ node {
    // This is to demo github action	
    def sonarUrl = 'sonar.host.url=http://172.17.0.2:9000'
    def mvnHome = tool name: 'maven3', type: 'maven'
+   def scannerHome = tool 'sonar_scanner'
+
    stage('GitClone'){
 	deleteDir()
   	checkout scm
@@ -24,9 +26,7 @@ node {
    }
    
 	   stage( 'teste estatico scanner sonar') {
-                environment {
-                    scannerHome = tool 'sonar_scanner'
-                }
+               
                     withSonarQubeEnv('sonar_server'){
                     sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=devops -Dsonar.host.url=http://172.17.0.3:9000 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/mvm**,**/src/test/**,**/model/**" 
                 }
