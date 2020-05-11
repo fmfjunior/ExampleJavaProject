@@ -3,20 +3,8 @@ pipeline {
     tools {
         jdk 'jdk11'
         maven 'maven3'
-        
+                
     }
-	def sonarUrl = 'sonar.host.url=http://172.17.0.2:9000'
-   	def mvnHome = tool name: 'Maven', type: 'maven'
-   stage('GitClone'){
-	deleteDir()
-  	checkout scm
-    // Clone repo
-	//git branch: 'master', 
-	//credentialsId: 'github', 
-	sh 'git clone https://github.com/fmfjunior/ExampleJavaProject'
-	//url: 'https://github.com/fmfjunior/com.sonar.maven'
-   
-   }
     stages {
       stage ( 'construindo' ) {
           steps {
@@ -34,9 +22,15 @@ pipeline {
                 }
                 steps{
                     withSonarQubeEnv('sonar_server'){
-                    sh "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=devops -Dsonar.host.url=http://localhost:9000 -Dsonar.login=jenkins -Dsonar.java.binaries=**/target/** -Dsonar.coverage.exclusions=**/mvm**,**/src/test/**,**/model/**" 
+                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=devops -Dsonar.host.url=http://172.17.0.2:9000 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/mvm**,**/src/test/**,**/model/**" 
                     }
              }
+        }
+    }
+    post {
+        always {
+            junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml'
+            archiveArtifacts artifacts: 'target/tasks-backend.war, frontend/target/tasks.war', onlyIfSuccessful: true
         }
     }
 }
