@@ -1,4 +1,4 @@
-node {
+pipeline {
 
    // This is to demo github action	
    def sonarUrl = 'sonar.host.url=http://172.17.0.2:9000'
