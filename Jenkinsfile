@@ -40,8 +40,8 @@ node {
 	    withCredentials([string(credentialsId: 'SonarToken', variable: 'sonarToken')]) {
        	    def sonarToken = "sonar.login=${sonarToken}"
             sh "${mvnHome}/bin/mvn sonar:sonar -D${sonarUrl}  -D${sonarToken}"
-	    }*/
-   }
+	    }
+   }*/
 
     //stage('Sonar Publish'){
 	//withCredentials([string(credentialsId: 'SonarToken', variable: 'sonarToken')]) {
