@@ -30,7 +30,7 @@ pipeline {
 	 // Build using maven
 	   //Get Maven Home Path
 	   steps { 
-	     sh  'mvn package'
+	     sh 'mvn package'
 	   }  
     }
      
