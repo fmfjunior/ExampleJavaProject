@@ -3,7 +3,7 @@ node {
    // This is to demo github action	
    def sonarUrl = 'sonar.host.url=http://172.17.0.2:9000'
    def mvnHome = tool name: 'Maven', type: 'maven'
-   stage('SCM Checkout'){
+   stage('GitClone'){
 	deleteDir()
   	checkout scm
     // Clone repo
@@ -14,7 +14,7 @@ node {
    
    }
    
-   stage('Mvn Package'){
+   stage('MvnPackage'){
 	 // Build using maven
 	   //Get Maven Home Path
 	  
@@ -23,12 +23,12 @@ node {
 	   sh "${mvnHome}/bin/mvn jacoco:report"
    }
    
-   /*stage('Sonarqube') {
+  stage('Code QA') {
 	    withCredentials([string(credentialsId: 'SonarToken', variable: 'sonarToken')]) {
        	    def sonarToken = "sonar.login=${sonarToken}"
             sh "${mvnHome}/bin/mvn sonar:sonar -D${sonarUrl}  -D${sonarToken}"
 	    }
-   }*/
+   }
 
     //stage('Sonar Publish'){
 	//withCredentials([string(credentialsId: 'SonarToken', variable: 'sonarToken')]) {
