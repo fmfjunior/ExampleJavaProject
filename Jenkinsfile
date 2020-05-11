@@ -1,40 +1,48 @@
 pipeline {
-
+  agent any 
+  tools {
+        jdk 'jdk11'
+        maven 'maven3'
+                
+    }
    // This is to demo github action	
-   def sonarUrl = 'sonar.host.url=http://172.17.0.2:9000'
-   def mvnHome = tool name: 'maven3', type: 'maven'
-   def scannerHome = tool 'sonar_scanner'
-
+   //def sonarUrl = 'sonar.host.url=http://172.17.0.2:9000'
+   //def mvnHome = tool name: 'maven3', type: 'maven'
+   //def scannerHome = tool 'sonar_scanner'
+ stages {
    stage('GitClone'){
-	deleteDir()
-  	checkout scm
-    // Clone repo
-	//git branch: 'master', 
-	//credentialsId: 'github', 
-	sh 'git clone https://github.com/fmfjunior/ExampleJavaProject'
-	//url: 'https://github.com/fmfjunior/com.sonar.maven'
-   
-   }
+	steps { 
+	   deleteDir()
+  	   checkout scm
+           // Clone repo
+	   sh 'git clone https://github.com/fmfjunior/ExampleJavaProject'   
+	  }
+    }
    
      stage( 'Teste Unitario') {
-	   junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml, api-test/target/surefire-reports/*.xml, functional-test/target/surefire-reports/*.xml, functional-test/target/failsafe-reports/*.xml'
-	   sh "${mvnHome}/bin/mvn test"
-	    }
- 
+	 steps { 
+	   sh 'mvn test'
+	   junit 'reports/**/*.xml'
+	  }
+    } 
+	 
     stage('MvnPackage'){
 	 // Build using maven
 	   //Get Maven Home Path
-	  
-	   sh "${mvnHome}/bin/mvn package"
-   }
+	   steps { 
+	     sh  'mvn package'
+	   }  
+    }
      
  
      stage( 'Teste Estatico') {
-                    withSonarQubeEnv('sonar_server'){
-                    sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=devops -Dsonar.host.url=http://172.17.0.3:9000 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/mvm**,**/src/test/**,**/model/**" 
-                }
-        }
-    }
+	    steps { 
+              withSonarQubeEnv('sonar_server'){
+              sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=devops -Dsonar.host.url=http://172.17.0.3:9000 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/mvm**,**/src/test/**,**/model/**" 
+            }
+     }      
+   }
+ }
    
   /*stage('Code QA') {
 	    withCredentials([string(credentialsId: 'SonarToken', variable: 'sonarToken')]) {
