@@ -30,13 +30,13 @@ pipeline {
 	 
     stage( 'Teste Unitario') {
 	 steps { 
-	   sh 'mvn test'
-	   junit 'reports/**/*.xml'
+	   //junit 'reports/**/*.xml'
+           junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml
 	  }
     } 
 	 
    
-     stage( 'teste estatio scanner sonar') {
+     stage( 'Scanner sonar') {
           environment {
                 scannerHome = tool 'sonar_scanner'
           }
@@ -45,7 +45,7 @@ pipeline {
                 sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=devops -Dsonar.host.url=http://172.17.0.3:9000 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/mvm**,**/src/test/**,**/model/**" 
                 }
           }
-        }
+      }
     }
   }
   
