@@ -19,22 +19,23 @@ pipeline {
 	  }
     }
    
-     stage( 'Teste Unitario') {
+     stage('MvnPackage'){
+	 // Build using maven
+	   //Get Maven Home Path
+	   steps { 
+	     sh 'mvn clean package -DskipTest=true'
+	   }  
+    }
+	 
+	 
+    stage( 'Teste Unitario') {
 	 steps { 
 	   sh 'mvn test'
 	   junit 'reports/**/*.xml'
 	  }
     } 
 	 
-    stage('MvnPackage'){
-	 // Build using maven
-	   //Get Maven Home Path
-	   steps { 
-	     sh 'mvn package'
-	   }  
-    }
-     
- 
+   
      stage( 'Teste Estatico') {
 	    steps { 
               withSonarQubeEnv('sonar_server'){
