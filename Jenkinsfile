@@ -23,11 +23,24 @@ node {
 	   sh "${mvnHome}/bin/mvn jacoco:report"
    }
    
-  stage('Code QA') {
+	
+	stage ('Sonar Analysis') { 
+	environment {scannerHome = tool 'SONAR_SCANNER' } 
+	steps { withSonarQubeEnv('SONAR_LOCAL') { 
+	bat "${scannerHome}/bin/sonar-scanner -e -Dsonar.projectKey=DeployBack -Dsonar.host.url=http:/172.17.0.2/:9000 -Dsonar.login=2603757615bc4c8495f9c66d00fbf9c28e47bfb1 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/.mvn/**,**/src/test/**,**/model/**,**Application.java" 
+	} 
+	      } 
+} 
+	stage ('Quality Gate') { 
+		steps { 
+			sleep(5) timeout(time: 1, unit: 'MINUTES') { waitForQualityGate abortPipeline: true } 
+		} 
+	}
+  /*stage('Code QA') {
 	    withCredentials([string(credentialsId: 'SonarToken', variable: 'sonarToken')]) {
        	    def sonarToken = "sonar.login=${sonarToken}"
             sh "${mvnHome}/bin/mvn sonar:sonar -D${sonarUrl}  -D${sonarToken}"
-	    }
+	    }*/
    }
 
     //stage('Sonar Publish'){
