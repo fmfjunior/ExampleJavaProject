@@ -10,14 +10,14 @@ pipeline {
    //def mvnHome = tool name: 'maven3', type: 'maven'
    //def scannerHome = tool 'sonar_scanner'
  stages {
-   stage('GitClone'){
+   /*stage('GitClone'){
 	steps { 
 	   deleteDir()
   	   checkout scm
            // Clone repo
 	   sh 'git clone https://github.com/fmfjunior/ExampleJavaProject'   
 	  }
-    }
+    }*/
    
      stage('MvnPackage'){
 	 // Build using maven
