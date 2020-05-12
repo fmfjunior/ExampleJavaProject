@@ -5,6 +5,10 @@ pipeline {
         maven 'maven3'
                 
     }
+    environment {
+        sonarUrl = 'sonar.host.url=http://172.17.0.3:9000'
+	sonarToken = "sonar.login=${sonarToken}"
+    }
    // This is to demo github action	
    //def sonarUrl = 'sonar.host.url=http://172.17.0.2:9000'
    //def mvnHome = tool name: 'maven3', type: 'maven'
@@ -43,8 +47,6 @@ pipeline {
                 scannerHome = tool 'sonar_scanner'
           }*/
           steps{
-		def sonarUrl = 'sonar.host.url=http://172.17.0.3:9000'
-		def sonarToken = "sonar.login=${sonarToken}"
         	//sh "${mvn} sonar:sonar -D${sonarUrl}  -D${sonarToken}"
                 sh "mvn sonar:sonar-D${sonarUrl}  -D${sonarToken}"
 		//withSonarQubeEnv('sonar_server'){
