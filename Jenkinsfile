@@ -1,13 +1,13 @@
 pipeline {
   agent any 
   tools {
-        //jdk 'jdk11'
+        jdk 'jdk11'
         maven 'maven3'
                 
     }
     environment {
         sonarUrl = 'sonar.host.url=http://172.17.0.3:9000'
-	sonarToken = "sonar.login=${sonarToken}"
+	sonarToken = "sonar.login=${SonarToken}"
     }
    // This is to demo github action	
    //def sonarUrl = 'sonar.host.url=http://172.17.0.2:9000'
