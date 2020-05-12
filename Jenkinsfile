@@ -44,9 +44,9 @@ pipeline {
           }*/
           steps{
                 sh 'mvn sonar:sonar'
-		 /*withSonarQubeEnv('sonar_server'){
-                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=devops -Dsonar.host.url=http://172.17.0.3:9000 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/mvm**,**/src/test/**,**/model/** -Dsonar.junit.reportPath=target/surefire-reports -Dsonar.jacoco.reportPath=target/jacoco.exec" 
-                }*/
+		//withSonarQubeEnv('sonar_server'){
+                //sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=devops -Dsonar.host.url=http://172.17.0.3:9000 -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/mvm**,**/src/test/**,**/model/** -Dsonar.junit.reportPath=target/surefire-reports -Dsonar.jacoco.reportPath=target/jacoco.exec" 
+                //}
           }
       }
  }
