@@ -12,7 +12,7 @@ pipeline {
    // This is to demo github action	
    //def sonarUrl = 'sonar.host.url=http://172.17.0.2:9000'
    //def mvnHome = tool name: 'maven3', type: 'maven'
-   //def scannerHome = tool 'sonar_scanner'
+   def scannerHome = tool 'sonar_scanner'
  stages {
    /*stage('GitClone'){
 	steps { 
