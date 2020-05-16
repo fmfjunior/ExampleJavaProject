@@ -46,6 +46,7 @@ pipeline {
 	post { 
         	always {     
                 steps{
+		    withSonarQubeEnv('sonar_server'){
                     script {
                         echo 'I will always say Hello again!'
 			            //timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
@@ -56,6 +57,7 @@ pipeline {
     			    }
   			    }
 
+		    }
 		    }
 	}
 
