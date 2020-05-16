@@ -6,7 +6,7 @@ pipeline {
                 
     }
     environment {
-        sonarUrl = 'sonar.host.url=http://172.17.0.4:9000'
+        sonarUrl = 'sonar.host.url=http://172.17.0.3:9000'
 	sonarToken = "sonar.login=${SonarToken}"
 	scannerHome = tool 'sonar_scanner'
     }
