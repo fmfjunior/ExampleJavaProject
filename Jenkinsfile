@@ -55,9 +55,7 @@ pipeline {
                 }
           }
       }
-      post { 
-        always { 
-            echo 'I will always say Hello again!'
+      
         }
       }
       /*stage( 'Quality Gate' ){
@@ -71,6 +69,9 @@ pipeline {
 	}    
       }*/
  }
+post { 
+        always { 
+            echo 'I will always say Hello again!'
 
 }
   
