@@ -40,23 +40,22 @@ pipeline {
                 }
           }
       }
-      
-}
-
-	post ( 'Check Quality Gate') { 
-        	always {     
-                //steps{
+	 
+      stage( 'Check Quality Gate') {  
+                steps{
 		    withSonarQubeEnv('sonar_server'){
                     script {
     			        qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
     			        if (qg.status != 'OK') {
 							error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                    }
-    			    }
-  			    }
+                    		}
+    		     }
+  		     }
 
-		    }
-		    //}
+		}
 	}
+      
+}
+
 
 }
