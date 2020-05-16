@@ -51,7 +51,7 @@ pipeline {
         	//sh "${mvn} sonar:sonar -D${sonarUrl}  -D${sonarToken}"
                 //sh "mvn sonar:sonar -D${sonarUrl} -Dsonar.login=a5e73b0104116d3c3d30840822f94a896c568a6d"
 		withSonarQubeEnv('sonar_server'){
-                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=DevopsLAB -Dsonar.host.url=${sonarUrl} -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/mvm**,**/src/test/**,**/model/** -Dsonar.junit.reportPath=target/surefire-reports" 
+                sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=DevopsLAB -Dsonar.java.binaries=target -Dsonar.coverage.exclusions=**/mvm**,**/src/test/**,**/model/** -Dsonar.junit.reportPath=target/surefire-reports" 
                 }
           }
       }
